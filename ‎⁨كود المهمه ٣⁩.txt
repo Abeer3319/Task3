@@ -1,0 +1,39 @@
+
+
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <HTTPClient.h>
+#include <DHT.h>
+
+#define WIFI_SSID "NET"
+#define WIFI_PASSWORD "123456789I"
+#define DHT_PIN 25
+#define DHT_TYPE DHT22
+
+DHT dht(DHT_PIN, DHT_TYPE);
+WiFiClient client;
+
+const int sensorPin = A0;    
+const int ledPin = 13; 
+
+int sensorValue = 0; 
+
+void setup() {
+  Serial.begin(9600); 
+  pinMode(ledPin, OUTPUT); 
+}
+
+void loop() {
+  sensorValue = analogRead(sensorPin); 
+  Serial.print("Connecting to Wifi");
+  Serial.println(sensorValue);
+
+  
+  if (sensorValue > 500) {
+    digitalWrite(ledPin, HIGH); 
+  } else {
+    digitalWrite(ledPin, LOW);
+  }
+
+  delay(1000); 
+}
